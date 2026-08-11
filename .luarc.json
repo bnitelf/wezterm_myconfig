@@ -1,0 +1,9 @@
+{
+  "runtime.version": "LuaJIT",
+  "workspace.library": [
+    // Clone git clone https://github.com/DrKJeff16/wezterm-types.git to D:\sw\
+    // or any where you want to enable wezterm type autocomplete in Zed editor
+    "D:\\SW\\wezterm-types"
+  ],
+  "workspace.checkThirdParty": false
+}
