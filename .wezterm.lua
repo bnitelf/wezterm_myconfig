@@ -3,8 +3,13 @@ local wezterm = require("wezterm")
 -- This will hold the configuration.
 local config = wezterm.config_builder()
 
-config.color_scheme = "Tokyo Night"
-config.font = wezterm.font("FiraCode Nerd Font")
+wezterm.log_info("start my custom wezterm config.")
+
+-- config.color_scheme = "Tokyo Night"
+config.colors = config.colors or {}
+config.colors.foreground = "#CCCCCC"
+config.colors.background = "#1E1E1E"
+config.font = wezterm.font("FiraCode Nerd Font", { weight = "Regular"})
 config.font_size = 12.0
 config.line_height = 1.2
 
@@ -12,6 +17,8 @@ config.window_frame = {
 	font = wezterm.font("Roboto", { weight = "Bold" }),
 	font_size = 12.0, -- Smaller = shorter tab bar
 }
+
+
 
 -- Default Shell
 -- Powershell 5.1
@@ -27,23 +34,30 @@ config.keys = {
 		mods = "CTRL",
 		action = wezterm.action.CopyTo("Clipboard"),
 	},
-
 	-- Paste
 	{
 		key = "v",
 		mods = "CTRL",
 		action = wezterm.action.PasteFrom("Clipboard"),
-	},
+    },
+	-- To Switch back-forth last 2 tab
   {
     key = 'Tab',
     mods = 'CTRL',
     action = wezterm.action.ActivateLastTab,
-  },
+    },
+  -- To allow Shift + Enter to input new line when using AI agent like Kiro-cli
   {
     key = "Enter",
     mods = "SHIFT",
     action = wezterm.action.SendString("\n"),
   }
 }
+-- add my custom wezterm config dir to lua package.path so that lua know where to find module we require(module)
+package.path = package.path
+  .. ";" .. wezterm.config_dir .. "/?.lua"
+  .. ";" .. wezterm.config_dir .. "/lua/?.lua"
+
+require("lua.tab_title").setup()
 
 return config
