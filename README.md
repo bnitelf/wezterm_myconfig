@@ -1,18 +1,30 @@
 
-## Clone to local 
-__Linux / WSL__
+## How to use 
+
+Clone to local 
+
+### Linux / WSL
 
 ```bash
 git clone https://github.com/bnitelf/wezterm_myconfig.git ~/.config/wezterm
 ```
 
-__Windows (PowerShell)__
+### Windows (PowerShell)
 
 ```bash
 git clone https://github.com/bnitelf/wezterm_myconfig.git "$HOME\.config\wezterm"
 ```
 
-__Launch Wezterm with__
+Then   
+
+__Option 1: Add env var `WEZTERM_CONFIG_FILE` (Recommended)__
+```
+WEZTERM_CONFIG_FILE = C:\Users\{your_username}\.config\wezterm\.wezterm.lua
+```
+then launch wezterm normally.
+
+
+__Option 2: Launch Wezterm with__
 ```bash
 # Linux 
 westerm ~/.config/wezterm/.wezterm.lua
@@ -24,6 +36,9 @@ westerm ~/.config/wezterm/.wezterm.lua
 # -> in Target field add 
 {your_root}\wezterm-gui.exe --config-file "C:\Users\{your_username}\.config\wezterm\.wezterm.lua"
 ```
+
+__Cons__   
+on Window, if you pin shortcut to Taskbar / Start, it won't use the our custom wezterm config file.
 
 ## Set Powershell profile to send OSC 7
 To Terminal Emulator, in this case wezterm
