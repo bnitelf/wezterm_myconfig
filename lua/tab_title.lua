@@ -179,10 +179,12 @@ function M.setup()
 		-- else
 		-- 	return cwd
         -- end
+        local idx = tab.tab_index + 1
+        
         if cwd:match("^~") then
-            return string.format("%s %s", app, cwd)
+            return string.format("%d: %s %s", idx, app, cwd)
         else
-            return string.format("%s - %s", app, cwd)
+            return string.format("%d: %s - %s", idx, app, cwd)
         end
 	end)
 end
