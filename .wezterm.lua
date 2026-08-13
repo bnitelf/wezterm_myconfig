@@ -5,7 +5,9 @@ local config = wezterm.config_builder()
 
 wezterm.log_info("start my custom wezterm config.")
 
+config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
 -- config.color_scheme = "Tokyo Night"
+config.color_scheme = "Dark+"
 config.colors = config.colors or {}
 config.colors.foreground = "#CCCCCC"
 config.colors.background = "#1E1E1E"
