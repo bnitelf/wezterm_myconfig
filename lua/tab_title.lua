@@ -78,7 +78,7 @@ local function cache_wsl_home_dir(distro)
     })
     if success and stdout and stdout ~= "" then
         cache_wsl_home_dirs[distro] = stdout
-        wezterm.log_info("cached WSL home for " .. distro .. " = " .. stdout)
+        -- wezterm.log_info("cached WSL home for " .. distro .. " = " .. stdout)
     end
 end
 
@@ -259,15 +259,15 @@ function M.setup(opts)
         
         local pane = tab.active_pane
 		
-		wezterm.log_info("== format-tab-title")
-		wezterm.log_info("tab_id: " .. tostring(tab.tab_id))
-		wezterm.log_info("tab is_active: " .. tostring(tab.is_active))
-		wezterm.log_info("pane_id: " .. tostring(pane.pane_id))
-		wezterm.log_info("pane domain: " .. tostring(pane.domain_name))
-		wezterm.log_info("pane title: " .. tostring(pane.title))
-		-- wezterm.log_info("pane cwd: " .. tostring(pane.current_working_dir.file_path))
-		wezterm.log_info("pane cwd filepath: " .. tostring(pane.current_working_dir))
-        wezterm.log_info("pane foreground_process_name: " .. tostring(pane.foreground_process_name))
+		-- wezterm.log_info("== format-tab-title")
+		-- wezterm.log_info("tab_id: " .. tostring(tab.tab_id))
+		-- wezterm.log_info("tab is_active: " .. tostring(tab.is_active))
+		-- wezterm.log_info("pane_id: " .. tostring(pane.pane_id))
+		-- wezterm.log_info("pane domain: " .. tostring(pane.domain_name))
+		-- wezterm.log_info("pane title: " .. tostring(pane.title))
+		-- -- wezterm.log_info("pane cwd: " .. tostring(pane.current_working_dir.file_path))
+		-- wezterm.log_info("pane cwd filepath: " .. tostring(pane.current_working_dir))
+  --       wezterm.log_info("pane foreground_process_name: " .. tostring(pane.foreground_process_name))
 		
 		-- Skip Debug Overlay (this virtual tab open when you press ctrl+shift+L to debug wezterm)
 		if pane.title == "Debug" then
@@ -320,7 +320,7 @@ function M.setup(opts)
         local custom_shell_name = ""
         local icon_color = nil
 
-        wezterm.log_info("proc = "..processName);
+        -- wezterm.log_info("proc = "..processName);
 
         if shell == "powershell" then
             custom_shell_name = "PS5"
@@ -350,8 +350,8 @@ function M.setup(opts)
             end
         end
 
-        wezterm.log_info("shell = " .. custom_shell_name)
-        wezterm.log_info("shell_or_icon = " .. shell_or_icon)
+        -- wezterm.log_info("shell = " .. custom_shell_name)
+        -- wezterm.log_info("shell_or_icon = " .. shell_or_icon)
 
         local sub_proc = ""
         
@@ -380,7 +380,7 @@ function M.setup(opts)
             sub_proc = pane.title:gsub("\\", "/")
         end
 
-        wezterm.log_info("sub_proc = " .. sub_proc)
+        -- wezterm.log_info("sub_proc = " .. sub_proc)
 
         -- add actual application running inside shell to tab title (ignore if detect / or ~ assume they are path)
         if not sub_proc:find("/") and not sub_proc:find("~") then
@@ -389,7 +389,7 @@ function M.setup(opts)
         
         local idx = tab.tab_index + 1
 
-        wezterm.log_info("tab ".. idx .. " app_or_icon = " .. shell_or_icon);
+        -- wezterm.log_info("tab ".. idx .. " app_or_icon = " .. shell_or_icon);
 
         local separator = cwd:match("^~") and " " or " - "
         local title_text = string.format("%d: ", idx)
