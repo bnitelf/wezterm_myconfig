@@ -131,7 +131,7 @@ local function cwd_name(pane)
 
     local cwd_normalized = cwd.file_path
 
-    wezterm.log_info("cwd_normalized = " .. cwd.file_path)
+    -- wezterm.log_info("cwd_normalized = " .. cwd.file_path)
     -- Strip file:// or file://hostname/
     cwd_normalized = cwd_normalized:gsub("^file://[^/]*", "")
 
@@ -148,7 +148,7 @@ local function cwd_name(pane)
 
     -- Build home path. Prefer USERPROFILE (full path) over USERNAME.
     local home
-    wezterm.log_info("home_dir = " .. wezterm.home_dir)
+    -- wezterm.log_info("home_dir = " .. wezterm.home_dir)
     -- Detect Window or Unix path
     if cwd_normalized:match("^/") then
         -- Linux:   home is /home/your_username
@@ -159,13 +159,13 @@ local function cwd_name(pane)
             unix_home = get_wsl_home_dir(pane, cwd_normalized)
         end
         home = unix_home
-        wezterm.log_info("unix_home = " .. unix_home)
+        -- wezterm.log_info("unix_home = " .. unix_home)
     else
         local userprofile = os.getenv("USERPROFILE") or ""
         home = userprofile:gsub("\\", "/")
-        wezterm.log_info("userprofile = " .. userprofile)
+        -- wezterm.log_info("userprofile = " .. userprofile)
     end
-    wezterm.log_info("home = " .. home)
+    -- wezterm.log_info("home = " .. home)
 
     -- Case-insensitive comparison for Windows paths.
     local cwd_normalized_lower = cwd_normalized:lower()
@@ -267,7 +267,7 @@ function M.setup(opts)
 		-- wezterm.log_info("pane title: " .. tostring(pane.title))
 		-- -- wezterm.log_info("pane cwd: " .. tostring(pane.current_working_dir.file_path))
 		-- wezterm.log_info("pane cwd filepath: " .. tostring(pane.current_working_dir))
-  --       wezterm.log_info("pane foreground_process_name: " .. tostring(pane.foreground_process_name))
+        -- wezterm.log_info("pane foreground_process_name: " .. tostring(pane.foreground_process_name))
 		
 		-- Skip Debug Overlay (this virtual tab open when you press ctrl+shift+L to debug wezterm)
 		if pane.title == "Debug" then
@@ -383,7 +383,8 @@ function M.setup(opts)
         -- wezterm.log_info("sub_proc = " .. sub_proc)
 
         -- add actual application running inside shell to tab title (ignore if detect / or ~ assume they are path)
-        if not sub_proc:find("/") and not sub_proc:find("~") then
+        -- when on wsl, in normal cli session, pane.title become ..excerpt_of_full_cwd
+        if not sub_proc:find("/") and not sub_proc:find("~") and not sub_proc:find("%.%.") then
             shell_or_icon = shell_or_icon .. " " .. sub_proc
         end
         
